@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CodeQuest</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Monaco Editor -->
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs/loader.js"></script>
+
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+
+<!-- ======================================================
+     LOGIN (igual que lo tenías)
+====================================================== -->
+<section id="login-screen" class="full-center">
+  <div class="auth-card">
+    
+    <div class="auth-left">
+      <h2>Iniciar Sesión</h2>
+      <input id="login-email" type="text" placeholder="Correo o teléfono" />
+      <input id="login-pass" type="password" placeholder="Contraseña" />
+      <button id="btn-login" class="btn primary">Entrar</button>
+      <p id="login-msg" class="msg"></p>
+    </div>
+
+    <div class="auth-right">
+      <h2>Crear Cuenta</h2>
+
+      <select id="metodo-registro" class="select">
+        <option value="email">Registrarse con Email</option>
+        <option value="telefono">Registrarse con Teléfono</option>
+        <option value="google">Registrarse con Google</option>
+        <option value="facebook">Registrarse con Facebook</option>
+      </select>
+
+      <div id="formulario-dinamico"></div>
+      <p id="registro-msg" class="msg"></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================================================
+     HOME SCREEN
+====================================================== -->
+<section id="home-screen" class="page" style="display:none;">
+  <header class="home-header">
+
+    <div class="profile">
+      <label id="avatar-label">
+        <img id="avatar-img" alt="avatar"/>
+        <input type="file" id="avatar-input" accept="image/*" style="display:none;">
+      </label>
+      <div id="user-email" class="user-email"></div>
+    </div>
+
+    <button id="btn-logout" class="btn danger">Cerrar Sesión</button>
+  </header>
+
+  <main class="home-main">
+    <h1>BIENVENIDO A CODEQUEST</h1>
+    <h2>Aprende programando con mini-juegos de lógica y código</h2>
+
+    <center>
+      <button id="js-button" class="main-btn">
+        <span class="sub-text">APRENDE JAVASCRIPT</span>
+      </button>
+    </center>
+
+    <p class="intro-box">
+      CodeQuest te enseña JavaScript desde lo más básico hasta ejercicios reales,
+      mediante retos interactivos y explicaciones visuales.
+      Cada nivel aumenta la dificultad gradualmente.
+    </p>
+  </main>
+</section>
+
+<!-- ======================================================
+     GAME / DESAFÍO
+====================================================== -->
+<section id="game-section" class="page" style="display:none;">
+
+  <div class="game-top">
+    <h2>Juego — Aprendiendo JavaScript</h2>
+
+    <div class="controls">
+      <div class="levels">
+        <button class="level-btn" data-level="easy">Fácil</button>
+        <button class="level-btn" data-level="medium">Medio</button>
+        <button class="level-btn" data-level="hard">Difícil (2 min)</button>
+      </div>
+
+      <div class="actions">
+        <div id="timer">Tiempo: --</div>
+        <button id="start-btn" class="btn primary">Iniciar Reto</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="desafio-box" class="desafio-box">
+
+    <!-- INSTRUCCIÓN DEL RETO -->
+    <div id="challenge-instructions" class="challenge-instructions">
+      <p>Selecciona un nivel y presiona <strong>Iniciar Reto</strong>.</p>
+    </div>
+
+    <!-- NUEVO: EJEMPLO -->
+    <div id="challenge-example" class="example-box" style="display:none;">
+      <strong>Ejemplo:</strong>
+      <pre id="example-text"></pre>
+    </div>
+
+    <!-- NUEVO: EXPLICACIÓN -->
+    <div id="challenge-explain" class="explain-box" style="display:none;">
+      <strong>¿Para qué sirve?</strong>
+      <p id="explain-text"></p>
+    </div>
+
+    <!-- EDITOR MONACO -->
+    <div class="editor-monaco-wrap">
+      <div id="monaco-editor" style="width:100%;height:330px;"></div>
+    </div>
+
+    <!-- BOTONES -->
+    <div class="editor-actions">
+      <button id="checkBtn" class="btn primary">Comprobar</button>
+      <button id="nextBtn" class="btn" style="display:none;">Siguiente</button>
+
+      <div class="actions">
+    <button id="start-btn" class="btn primary">Iniciar reto</button>
+    <button id="btn-exit" class="btn danger">Abandonar Juego</button>
+</div>
+
+    </div>
+
+    <div id="result" class="result"></div>
+  </div>
+</section>
+
+</body>
+</html>
