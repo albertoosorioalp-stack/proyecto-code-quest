@@ -7,7 +7,6 @@
 
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Monaco Editor -->
   <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs/loader.js"></script>
 
   <script defer src="script.js"></script>
@@ -15,9 +14,6 @@
 
 <body>
 
-<!-- ======================================================
-     LOGIN (igual que lo tenías)
-====================================================== -->
 <section id="login-screen" class="full-center">
   <div class="auth-card">
     
@@ -46,9 +42,6 @@
   </div>
 </section>
 
-<!-- ======================================================
-     HOME SCREEN
-====================================================== -->
 <section id="home-screen" class="page" style="display:none;">
   <header class="home-header">
 
@@ -78,70 +71,157 @@
       mediante retos interactivos y explicaciones visuales.
       Cada nivel aumenta la dificultad gradualmente.
     </p>
+    <img id="project-main-image" src="descarga.png" alt="Conceptualización del proyecto CodeQuest" />
   </main>
 </section>
 
-<!-- ======================================================
-     GAME / DESAFÍO
-====================================================== -->
 <section id="game-section" class="page" style="display:none;">
 
-  <div class="game-top">
-    <h2>Juego — Aprendiendo JavaScript</h2>
+  <section id="game1-section">
+      <h2>Juego 1 — Retos de Código</h2>
 
-    <div class="controls">
+      <div class="game-top">
+        <div class="controls">
+          <div class="levels">
+            <button class="level-btn level1-btn active" data-level="easy">Fácil</button>
+            <button class="level-btn level1-btn" data-level="medium">Medio</button>
+            <button class="level-btn level1-btn" data-level="hard">Difícil</button>
+          </div>
+          
+          <div class="actions">
+            <div id="timer">Tiempo: --</div>
+            <button id="start-btn" class="btn primary">Iniciar Reto</button>
+            <button id="btn-exit" class="btn danger">Abandonar Juego</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="desafio-box-1" class="desafio-box">
+        <div id="challenge-instructions" class="challenge-instructions">
+          <p>Selecciona un nivel y presiona <strong>Iniciar Reto</strong>.</p>
+        </div>
+
+        <div id="challenge-example" class="example-box" style="display:none;">
+          <strong>Ejemplo:</strong>
+          <pre id="example-text"></pre>
+        </div>
+
+        <div id="challenge-explain" class="explain-box" style="display:none;">
+          <strong>¿Para qué sirve?</strong>
+          <p id="explain-text"></p>
+        </div>
+        
+        <div id="monaco-toast-1" class="toast warn"></div>
+
+        <div class="editor-monaco-wrap">
+          <div id="monaco-editor" style="width:100%;height:330px;"></div>
+        </div>
+
+        <div class="editor-actions">
+          <button id="checkBtn" class="btn primary">Comprobar</button>
+          <button id="nextBtn" class="btn" style="display:none;">Siguiente</button>
+        </div>
+
+        <div id="result" class="result"></div>
+      </div>
+  </section>
+
+
+  <section id="game2-section" style="margin-top:40px;">
+      <h2>Juego 2 — Preguntas de Conceptos</h2>
+
+      <div class="game-top">
+
+          <div class="levels">
+              <button class="level-btn level2-btn active" data-level="easy">Fácil (3 Opciones)</button>
+              <button class="level-btn level2-btn" data-level="medium">Medio (4 Opciones)</button>
+              <button class="level-btn level2-btn" data-level="hard">Difícil (5 Opciones)</button>
+          </div>
+
+          <div class="controls">
+              <div class="actions">
+                  <button id="start2-btn" class="btn primary">Iniciar Juego 2</button>
+                  <button id="btn-exit2" class="btn danger">Abandonar Juego 2</button>
+              </div>
+              <div id="timer2">Tiempo: --</div>
+          </div>
+
+      </div>
+
+      <div class="desafio-box">
+          <div id="challenge2-instructions" class="challenge-instructions">Selecciona nivel e inicia Juego 2.</div>
+
+          <div id="challenge2-explain" class="explain-box" style="display:block;">
+              <strong>Concepto:</strong>
+              <p id="explain2-text">Aprende sobre la utilidad de este concepto.</p>
+          </div>
+          
+          <div id="game2-options-container" class="game2-options-container">
+              </div>
+
+          <div class="editor-actions">
+              <button id="nextBtn2" class="btn primary" style="display:none;">Siguiente Pregunta</button>
+          </div>
+
+          <div id="result2" class="result"></div>
+      </div>
+
+  </section>
+
+
+  <section id="game3-section" style="margin-top:40px;">
+    <h2>Juego 3 — Retos de Depuración (Debugging)</h2>
+
+    <div class="game-top">
+
       <div class="levels">
-        <button class="level-btn" data-level="easy">Fácil</button>
-        <button class="level-btn" data-level="medium">Medio</button>
-        <button class="level-btn" data-level="hard">Difícil (2 min)</button>
+          <button class="level-btn level3-btn active" data-level="easy">Fácil (Sintaxis)</button>
+          <button class="level-btn level3-btn" data-level="medium">Medio (Lógica)</button>
+          <button class="level-btn level3-btn" data-level="hard">Difícil (Asincronía)</button>
       </div>
 
-      <div class="actions">
-        <div id="timer">Tiempo: --</div>
-        <button id="start-btn" class="btn primary">Iniciar Reto</button>
+      <div class="controls">
+        <div class="actions">
+            <button id="start3-btn" class="btn primary">Iniciar Depuración</button>
+            <button id="btn-exit3" class="btn danger">Abandonar Juego 3</button>
+        </div>
+        <div id="timer3">Tiempo: --</div>
       </div>
-    </div>
-  </div>
-
-  <div id="desafio-box" class="desafio-box">
-
-    <!-- INSTRUCCIÓN DEL RETO -->
-    <div id="challenge-instructions" class="challenge-instructions">
-      <p>Selecciona un nivel y presiona <strong>Iniciar Reto</strong>.</p>
-    </div>
-
-    <!-- NUEVO: EJEMPLO -->
-    <div id="challenge-example" class="example-box" style="display:none;">
-      <strong>Ejemplo:</strong>
-      <pre id="example-text"></pre>
-    </div>
-
-    <!-- NUEVO: EXPLICACIÓN -->
-    <div id="challenge-explain" class="explain-box" style="display:none;">
-      <strong>¿Para qué sirve?</strong>
-      <p id="explain-text"></p>
-    </div>
-
-    <!-- EDITOR MONACO -->
-    <div class="editor-monaco-wrap">
-      <div id="monaco-editor" style="width:100%;height:330px;"></div>
-    </div>
-
-    <!-- BOTONES -->
-    <div class="editor-actions">
-      <button id="checkBtn" class="btn primary">Comprobar</button>
-      <button id="nextBtn" class="btn" style="display:none;">Siguiente</button>
-
-      <div class="actions">
-    <button id="start-btn" class="btn primary">Iniciar reto</button>
-    <button id="btn-exit" class="btn danger">Abandonar Juego</button>
-</div>
 
     </div>
 
-    <div id="result" class="result"></div>
-  </div>
+    <div class="desafio-box">
+        <div id="challenge3-instructions" class="challenge-instructions">Selecciona nivel e inicia Juego 3 para empezar a corregir código.</div>
+        
+        <div id="challenge3-explain" class="explain-box" style="display:none;">
+            <strong>Contexto y Pista:</strong>
+            <p id="explain3-text"></p>
+        </div>
+
+        <div id="challenge3-test-info" class="test-info-box" style="display:none;">
+            <strong>Debe pasar la prueba:</strong>
+            <pre id="test3-text"></pre>
+        </div>
+        
+        <div id="monaco-toast-3" class="toast warn"></div>
+
+        <div class="editor-monaco-wrap">
+          <div id="monaco-editor-3" style="width:100%;height:330px;"></div>
+        </div>
+
+        <p class="editor-hint" id="editor-hint" style="display:none;">Edita el código para corregir el bug.</p>
+
+        <div class="editor-actions">
+            <button id="checkBtn3" class="btn primary">Corregir y Comprobar</button>
+            <button id="nextBtn3" class="btn" style="display:none;">Siguiente Bug</button>
+        </div>
+
+        <div id="result3" class="result"></div>
+    </div>
+  </section>
+
 </section>
 
 </body>
 </html>
+

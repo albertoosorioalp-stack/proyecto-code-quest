@@ -52,19 +52,30 @@ body {
 ======================================================== */
 .game-top { margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
 .levels { display:flex; gap:8px; }
-.level-btn { padding:8px 14px; background:#2e2e2e; color:white; border-radius:8px; border:1px solid #444; cursor:pointer; }
-.level-btn.active { background:#00eaff; color:#051923; font-weight:700; }
+/* Estilo unificado para botones de nivel (Juego 1, 2 y 3) */
+.level-btn { padding:8px 14px; background:#2e2e2e; color:white; border-radius:8px; border:1px solid #444; cursor:pointer; transition: background 0.2s; }
+.level-btn:hover { background: #3e3e3e; }
+.level-btn.active { background:#00eaff; color:#051923; font-weight:700; border-color:#00eaff; }
 
 .controls .actions { display:flex; align-items:center; gap:8px; }
-#timer { font-weight:700; padding:8px; background:rgba(255,255,255,0.03); border-radius:8px;}
+#timer, #timer2, #timer3 { font-weight:700; padding:8px; background:rgba(255,255,255,0.03); border-radius:8px;}
 
 /* desafio box */
-.desafio-box { background: rgba(255,255,255,0.04); padding:16px; border-radius:10px; max-width:960px; margin:18px auto; }
+.desafio-box { background: rgba(255,255,255,0.04); padding:16px; border-radius:10px; max-width:960px; margin:18px auto; position:relative; }
 
 /* instruction / example / explain */
 .challenge-instructions { background: rgba(255,255,255,0.03); padding:12px; border-radius:8px; margin-bottom:10px; }
 .example-box, .explain-box { background: rgba(255,255,255,0.02); padding:10px; border-radius:8px; margin-top:8px; border-left:4px solid #00ccff; }
-.example-box pre { margin-top:8px; color:#ffd27f; white-space:pre-wrap; font-size:14px; }
+
+/* Nuevo: Test Info Box (Juego 3) */
+.test-info-box {
+    background: rgba(255, 165, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 8px;
+    border-left: 4px solid #ffaa00; /* Naranja para advertencia/prueba */
+}
+.test-info-box pre, .example-box pre { margin-top:8px; color:#ffd27f; white-space:pre-wrap; font-size:14px; }
 
 /* result box */
 .result { margin-top:12px; padding:10px; border-radius:8px; display:none; }
@@ -93,7 +104,7 @@ body {
 }
 .editor-monaco-wrap.shake { animation: shake 0.6s ease; }
 
-/* toast (mensaje breve) */
+/* toast (mensaje breve para copy/paste) */
 .toast {
   position: absolute;
   top: 12px;
@@ -108,30 +119,104 @@ body {
   display:none;
 }
 
-/* success / info toasts */
-.toast.info { background:#00bcd4; }
-.toast.warn { background:#ff6b6b; }
-
-/* editor hint (small) */
+/* editor hint (small) - Usado para Juego 3 */
 .editor-hint {
   position:absolute; bottom:8px; left:12px; font-size:12px; color:#aaa;
+  z-index: 5;
 }
 
 /* buttons row */
 .editor-actions { margin-top:12px; display:flex; gap:10px; }
+
+/* ========================================================
+   JUEGO 2 ESPECÍFICO (Opciones de Respuesta)
+======================================================== */
+.game2-options-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-btn {
+    width: 100%;
+    text-align: left;
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    padding: 12px 15px;
+    font-size: 16px;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.option-btn:hover:not(:disabled) {
+    background: #555;
+    transform: translateY(-1px);
+}
+
+.option-btn.correct-answer {
+    background: #4caf50; /* Verde */
+    border-color: #4caf50;
+    font-weight: bold;
+    color: #000;
+}
+
+.option-btn.wrong-answer {
+    background: #d32f2f; /* Rojo */
+    border-color: #d32f2f;
+    font-weight: bold;
+}
+
+.option-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
 
 /* responsive */
 @media (max-width:900px) {
   .auth-card { flex-direction:column; width:92%; }
   .editor-monaco-wrap { height:300px; }
   .home-main h1 { font-size:26px; }
+  .game-top { flex-direction: column; align-items: flex-start; }
+  .levels { width: 100%; justify-content: space-between; }
+  .controls { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+  .controls .actions { flex-direction: row; }
 }
 
 
-
 body {
-  background: url("Gemini_Generated_Image_xkrhfyxkrhfyxkrh.png");
+  background: url("fondo.png");
   background-size: cover;
   background-position: center;
 }
 
+/* ========================================================
+   HOME
+======================================================== */
+.page { padding:28px; }
+.home-header { display:flex; justify-content:space-between; align-items:center; }
+.profile { display:flex; flex-direction:column; align-items:center; gap:8px; }
+#avatar-img { width:78px; height:78px; border-radius:50%; object-fit:cover; border:3px solid #00ff99; cursor:pointer; background:#333; }
+.user-email { color:#00ffcc; font-weight:700; }
+
+/* main */
+.main-btn { padding:16px 24px; font-size:20px; border-radius:12px; background:#2196f3; color:white; }
+
+/* ESTILO AÑADIDO PARA LA IMAGEN PRINCIPAL DEL HOME */
+#project-main-image {
+  display: block; 
+  margin: 30px auto; /* Centra horizontalmente y añade margen vertical */
+  width: 90%; 
+  max-width: 800px; /* Limita el tamaño máximo de la imagen */
+  height: auto;
+  border-radius: 10px;
+  border: 4px solid #00eaff; /* Borde que resalta */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+}
+/* FIN DEL ESTILO AÑADIDO */
+
+/* ========================================================
+   GAME / DESAFÍOS
+...
